@@ -468,7 +468,7 @@ void DrawGame(){
     UpdateGame(l1,velocity, y, canJump, canShoot);
     color="b";
     text="########################################";
-    cout<<"1234567890123456789012345678901234567890"<<endl;
+    //cout<<"1234567890123456789012345678901234567890"<<endl;
     PrintColor(text,color);
     DrawLine(l1);
     PrintColor(text,color);
