@@ -388,11 +388,11 @@ void IsPlayerStillWithUsChecker(int *lg){
 }
 void UpdateGame(int *l1, int &velocity, int &y, bool &canJump, bool &canShoot){
   Score+=10;
-  if(Score>=2000+gameSizex*20){
+  if(Score>=40000+gameSizex*20){
     GameEnd=true;
     win=true;
   }
-  else if(Score>=2000){
+  else if(Score>=40000){
   
   if(velocity==0&&y!=1){
     y-=1;
@@ -474,14 +474,14 @@ void DrawGame(){
     PrintColor(text,color);
     cout<<endl;
     cout<<"Score="<<Score<<endl<<endl;;
-    cout<<"y="<<y<<endl;
-    cout<<"canjump="<<canJump<<endl;
-    cout<<"movU="<<movU<<endl;
-    cout<<"second block"<<l1[1]<<endl;
-    cout<<"player pos:"<<playerPos<<endl;
-    cout<<"Curry="<<currY<<endl;
-    cout<<"Currx="<<currX<<endl;
-    cout<<"Emptyspace="<<emptyspace<<endl;
+    //cout<<"y="<<y<<endl;
+    //cout<<"canjump="<<canJump<<endl;
+    //cout<<"movU="<<movU<<endl;
+    //cout<<"second block"<<l1[1]<<endl;
+    //cout<<"player pos:"<<playerPos<<endl;
+    //cout<<"Curry="<<currY<<endl;
+    //cout<<"Currx="<<currX<<endl;
+    //cout<<"Emptyspace="<<emptyspace<<endl;
     cout<<endl;
     
     this_thread::sleep_for(chrono::milliseconds(GameSpeed));
