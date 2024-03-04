@@ -8,4 +8,4 @@ This is a simple 2D game to be played in the terminal.
 3. Run the game using $ ./glowingjumper
 
 # Running on Windows
-Download and run the latest .exe release.
+Download and run the latest non existant .exe release.
