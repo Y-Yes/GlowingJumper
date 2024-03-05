@@ -566,7 +566,6 @@ int main() {
   cout<<"RIP"<<endl;
   this_thread::sleep_for(chrono::milliseconds(1000));
   ClearScreen();
-  return main();
 //-> ===========+    !!
 //  ##               ##
 //  ##              ####
