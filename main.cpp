@@ -261,7 +261,7 @@ void UpdateEnemies(int *lg){
 }
 
 void JumpEnemies(int *lg){ 
-  int enemyX, enemyY, enemyHeight, ignoreList[gameSizex];//ignore list first integer tells how many entries are in the array and the others are X coordinates of the enemies. It is a dum way to manage this but Ain't nobody got time for that.
+  int enemyX, enemyY, enemyHeight=-1, ignoreList[gameSizex];//ignore list first integer tells how many entries are in the array and the others are X coordinates of the enemies. It is a dum way to manage this but Ain't nobody got time for that.
   int odds = rand() % 4 + 1;
   ignoreList[0]=0;
   int pr=0, pab=0;
@@ -275,41 +275,59 @@ void JumpEnemies(int *lg){
       if(lg[currpos]==4){
         enemyX=j-pr;
         enemyY=gameSizey-i+1;
-        for(int i=0; i<ignoreList[0]; i++){
-          if(ignoreList[i]==enemyX){
-            breaker=true;
-          }
+      if(lg[currpos-gameSizex]==4){
+        lg[currpos-gameSizex]=0;
+      }
         }
-        for(int i=1; i<=5; i++){
+        for(int i=1; i<=6;i++){
           if(lg[currpos+gameSizex*i]==5){
             enemyHeight=i;
+            break;
           }
         }
-        if(breaker){
-
-        } else if(enemyHeight==1&&odds==2){
+      if(lg[currpos]==4){
+        if(enemyHeight==1&&odds==1){
           lg[currpos]=0;
-          lg[currpos-gameSizex]=4;
-        }else if(enemyHeight>1&&enemyHeight<3){
-          if(odds>=2){
-            lg[currpos]=0;
-            lg[currpos-gameSizex]=4;
-          } else {
-            lg[currpos]=0;
-            lg[currpos+gameSizex]=4;
-          }          
+          if(lg[currpos-gameSizex]==1){
+            GameEnd=true;
+          }
+          lg[currpos-gameSizex]=6;
         }
-        else if(enemyHeight>=3){
-          lg[currpos]=0;
-          lg[currpos+gameSizex]=4;
+        else if(enemyHeight==2){
+          if(odds>2){
+            lg[currpos]=0;
+            if(lg[currpos-gameSizex]==1){
+              GameEnd=true;
+            }
+            lg[currpos-gameSizex]=6;
+          }else{
+            if(lg[currpos+gameSizex]==1){
+              GameEnd=true;
+            }
+            lg[currpos]=0;
+            lg[currpos+gameSizex]=6;
+          }
         }
-        ignoreList[0]=ignoreList[0]+1;
-        ignoreList[ignoreList[0]]=enemyX;
-        breaker=false;
+        else if(enemyHeight==3){
+            if(lg[currpos+gameSizex]==1){
+            GameEnd=true;
+          }
+            lg[currpos]=0;
+            lg[currpos+gameSizex]=6;
+          }
+        }
+      if(lg[currpos]==4){
+     // cout<<enemyHeight<<endl;
+    //this_thread::sleep_for(chrono::milliseconds(300));
+      }
       odds = rand() % 4 + 1;
       }
     }
-  }
+    for (int i=0; i<gameSizex*gameSizey; i++){
+      if(lg[i]==6){
+        lg[i]=4;//removes the don't touch me flag after the moving is done so that the enemies couldn't be moved twice in the same game tick.
+      }
+    }
 }
 //01234
 //56789
@@ -341,11 +359,18 @@ int x;
   GameEnd=true;
   }
   if(currY>y&&l1[x+gameSizex]!=5&&l1[x+gameSizex+1]!=5){
+      if(l1[x+gameSizex]==4){
+      GameEnd=true;
+    }
+    
     l1[x]=0;
     l1[x+gameSizex]=1;
     playerPos+=gameSizex;
   }
   else if(currY<y){
+      if(l1[x-gameSizex]==4){
+      GameEnd=true;
+    }
       l1[x]=0;
       l1[x-gameSizex]=1;
       playerPos-=gameSizex;
@@ -514,11 +539,11 @@ int main() {
   ClearScreen();
   cout<<R"(
   _             !
- | |	  This is Your Enemy.
- | |	  You must shoot and destroy him or he will destroy you.
- | |	  Fun Fact:
- |_|	  They are powerfull enough to destroy the ground sometimes.
- (_)	  It's not a bug I promise.
+ | |	 This is Your Enemy.
+ | |	 You must shoot and destroy him or he will destroy you.
+ | |	 Fun Fact:
+ |_|	 They don't really know where to move so they just fly around and land randomly.
+ (_)	 
   )";
   getline(cin,choice);
   ClearScreen();
@@ -539,10 +564,9 @@ int main() {
 	}
   t1.join();
   cout<<"RIP"<<endl;
-  string text;
-  string color;
-  text="Hello World!";
-  Draw();
+  this_thread::sleep_for(chrono::milliseconds(1000));
+  ClearScreen();
+  return main();
 //-> ===========+    !!
 //  ##               ##
 //  ##              ####
