@@ -56,9 +56,6 @@ void ClearScreen(){
     cout << "\033[2J\033[1;1H";
 }
 
-void Draw(){
-
-}
 
 
 void enableRawMode() {
@@ -539,11 +536,11 @@ int main() {
   ClearScreen();
   cout<<R"(
   _             !
- | |	 This is Your Enemy.
- | |	 You must shoot and destroy him or he will destroy you.
- | |	 Fun Fact:
- |_|	 They don't really know where to move so they just fly around and land randomly.
- (_)	 
+ | |	  This is Your Enemy.
+ | |	  You must shoot and destroy him or he will destroy you.
+ | |	  Fun Fact:
+ |_|	  They don't really know where to move so they just fly around and land randomly.
+ (_)	  
   )";
   getline(cin,choice);
   ClearScreen();
