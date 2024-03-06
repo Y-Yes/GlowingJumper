@@ -11,4 +11,4 @@ This is a simple 2D game to be played in the terminal.
 # Running on Windows
 Doesn't run well, very poor performance.
 
-#Licensed under GPLv3
+# Licensed under GPLv3
